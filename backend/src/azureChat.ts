@@ -57,7 +57,8 @@ export async function createHrReply(message: string, history: HistoryItem[]) {
         ...safeHistory,
         { role: 'user', content: message },
       ],
-      max_completion_tokens: 500,
+      max_completion_tokens: 5_000,
+      reasoning_effort: 'low',
     });
 
     return completion.choices[0]?.message?.content?.trim()

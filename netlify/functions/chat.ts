@@ -88,7 +88,8 @@ export default async function handler(request: Request) {
         ...safeHistory,
         { role: 'user', content: message },
       ],
-      max_completion_tokens: 500,
+      max_completion_tokens: 5_000,
+      reasoning_effort: 'low',
     });
     const reply = completion.choices[0]?.message?.content?.trim()
       || 'I could not create a response. Please try again or contact People & Culture.';
