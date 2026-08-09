@@ -1,4 +1,4 @@
-import { AzureOpenAI } from 'openai';
+import OpenAI, { AzureOpenAI } from 'openai';
 import '@azure/openai/types';
 
 export interface HistoryItem {
@@ -20,6 +20,23 @@ export function hasAzureConfiguration() {
     && isConfigured(process.env.AZURE_OPENAI_DEPLOYMENT);
 }
 
+function createAzureClient(endpoint: string, apiKey: string, deployment: string) {
+  const endpointUrl = new URL(endpoint);
+  if (endpointUrl.hostname.endsWith('.services.ai.azure.com')) {
+    return new OpenAI({
+      baseURL: `${endpointUrl.origin}/openai/v1`,
+      apiKey,
+    });
+  }
+
+  return new AzureOpenAI({
+    endpoint: endpointUrl.origin,
+    apiKey,
+    deployment,
+    apiVersion: '2024-10-21',
+  });
+}
+
 export async function createHrReply(message: string, history: HistoryItem[]) {
   if (!hasAzureConfiguration()) return MOCK_REPLY;
 
@@ -27,12 +44,7 @@ export async function createHrReply(message: string, history: HistoryItem[]) {
     const endpoint = process.env.AZURE_OPENAI_ENDPOINT!;
     const apiKey = process.env.AZURE_OPENAI_API_KEY!;
     const deployment = process.env.AZURE_OPENAI_DEPLOYMENT!;
-    const client = new AzureOpenAI({
-      endpoint,
-      apiKey,
-      deployment,
-      apiVersion: '2024-10-21',
-    });
+    const client = createAzureClient(endpoint, apiKey, deployment);
 
     const safeHistory = history.slice(-12).map((item) => ({
       role: item.role,
@@ -45,8 +57,7 @@ export async function createHrReply(message: string, history: HistoryItem[]) {
         ...safeHistory,
         { role: 'user', content: message },
       ],
-      temperature: 0.25,
-      max_tokens: 500,
+      max_completion_tokens: 500,
     });
 
     return completion.choices[0]?.message?.content?.trim()

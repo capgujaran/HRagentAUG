@@ -66,12 +66,12 @@ npm start
 Create an Azure OpenAI resource, deploy a chat-capable model, and set:
 
 ```dotenv
-AZURE_OPENAI_ENDPOINT=https://your-resource-name.openai.azure.com/
+AZURE_OPENAI_ENDPOINT=https://your-resource-name.services.ai.azure.com
 AZURE_OPENAI_API_KEY=your-private-api-key
 AZURE_OPENAI_DEPLOYMENT=gpt-4o
 ```
 
-`AZURE_OPENAI_DEPLOYMENT` must be the deployment name configured in Azure, not merely the underlying model family name. Both API implementations follow the official `@azure/openai` 2.x integration: the Azure companion types come from `@azure/openai`, and its documented `AzureOpenAI` client comes from the companion `openai` package. Credentials are read only on the server and are never included in the frontend bundle.
+`AZURE_OPENAI_DEPLOYMENT` must be the deployment name configured in Azure, not merely the underlying model family name. Microsoft Foundry endpoints ending in `.services.ai.azure.com` use the portal-provided `/openai/v1` base URL; classic Azure OpenAI endpoints ending in `.openai.azure.com` use `AzureOpenAI`. Both API implementations include the official `@azure/openai` companion types. Credentials are read only on the server and are never included in the frontend bundle.
 
 ## Push to GitHub
 

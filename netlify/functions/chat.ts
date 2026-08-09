@@ -1,4 +1,4 @@
-import { AzureOpenAI } from 'openai';
+import OpenAI, { AzureOpenAI } from 'openai';
 import '@azure/openai/types';
 
 interface HistoryItem {
@@ -23,6 +23,23 @@ function json(body: object, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
+  });
+}
+
+function createAzureClient(endpoint: string, apiKey: string, deployment: string) {
+  const endpointUrl = new URL(endpoint);
+  if (endpointUrl.hostname.endsWith('.services.ai.azure.com')) {
+    return new OpenAI({
+      baseURL: `${endpointUrl.origin}/openai/v1`,
+      apiKey,
+    });
+  }
+
+  return new AzureOpenAI({
+    endpoint: endpointUrl.origin,
+    apiKey,
+    deployment,
+    apiVersion: '2024-10-21',
   });
 }
 
@@ -59,12 +76,7 @@ export default async function handler(request: Request) {
   }
 
   try {
-    const client = new AzureOpenAI({
-      endpoint: endpoint!,
-      apiKey: apiKey!,
-      deployment: deployment!,
-      apiVersion: '2024-10-21',
-    });
+    const client = createAzureClient(endpoint!, apiKey!, deployment!);
     const safeHistory = history.slice(-12).map((item) => ({
       role: item.role,
       content: item.content.slice(0, 4_000),
@@ -76,8 +88,7 @@ export default async function handler(request: Request) {
         ...safeHistory,
         { role: 'user', content: message },
       ],
-      temperature: 0.25,
-      max_tokens: 500,
+      max_completion_tokens: 500,
     });
     const reply = completion.choices[0]?.message?.content?.trim()
       || 'I could not create a response. Please try again or contact People & Culture.';
