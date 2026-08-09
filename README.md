@@ -107,4 +107,4 @@ Never prefix the Azure variables with `VITE_`; doing so would expose them to bro
 
 ## Demo fallback
 
-When any required Azure variable is absent or still contains a placeholder, both the Express route and Netlify Function return a canned HR-focused reply. This keeps the chat popup functional for demos without exposing or requiring credentials.
+When any required Azure variable is absent, contains a placeholder, or the configured Azure service is unreachable, both the Express route and Netlify Function return a canned HR-focused reply. This keeps the chat popup functional for demos without exposing or requiring credentials.

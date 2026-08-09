@@ -13,7 +13,7 @@ interface ChatPayload {
 
 const SYSTEM_PROMPT = `You are PeopleHub's HR assistant. Help employees only with HR topics, specifically leave, payroll, benefits, and workplace policies. Give clear, concise, practical guidance. Do not invent personal employment data or policy details that were not provided. When a question requires a personal decision or confidential case review, recommend contacting People & Culture. If the user asks about anything outside HR, politely redirect them back to leave, payroll, benefits, or policies.`;
 
-const MOCK_REPLY = 'Demo mode: I can help with leave, payroll, benefits, and HR policies. Your Azure OpenAI connection is not configured yet, so please check the relevant PeopleHub page or contact People & Culture for a personal case.';
+const MOCK_REPLY = 'Demo mode: I can help with leave, payroll, benefits, and HR policies. Your Azure OpenAI connection is unavailable or not configured yet, so please check the relevant PeopleHub page or contact People & Culture for a personal case.';
 
 function isConfigured(value: string | undefined) {
   return Boolean(value && !value.includes('your-') && !value.includes('replace-with'));
@@ -83,7 +83,7 @@ export default async function handler(request: Request) {
       || 'I could not create a response. Please try again or contact People & Culture.';
     return json({ reply });
   } catch (error) {
-    console.error('Azure OpenAI chat request failed:', error instanceof Error ? error.message : error);
-    return json({ error: 'The HR assistant is temporarily unavailable.' }, 502);
+    console.error('Azure OpenAI is unreachable; using demo mode:', error instanceof Error ? error.message : error);
+    return json({ reply: MOCK_REPLY });
   }
 }
