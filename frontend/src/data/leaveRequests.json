@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "employee": "Jordan Davis",
+    "type": "Annual Leave",
+    "from": "2026-08-17",
+    "to": "2026-08-19",
+    "days": 3,
+    "status": "Approved"
+  },
+  {
+    "id": 2,
+    "employee": "Jordan Davis",
+    "type": "Personal Leave",
+    "from": "2026-06-04",
+    "to": "2026-06-04",
+    "days": 1,
+    "status": "Approved"
+  },
+  {
+    "id": 3,
+    "employee": "Jordan Davis",
+    "type": "Annual Leave",
+    "from": "2026-09-06",
+    "to": "2026-09-10",
+    "days": 5,
+    "status": "Pending"
+  },
+  {
+    "id": 4,
+    "employee": "Jordan Davis",
+    "type": "Sick Leave",
+    "from": "2026-03-12",
+    "to": "2026-03-13",
+    "days": 2,
+    "status": "Approved"
+  }
+]

@@ -1,0 +1,23 @@
+.page { display: grid; gap: 22px; }
+.pageHeading { display: flex; align-items: end; justify-content: space-between; }
+.pageHeading p { margin: 0 0 5px; color: var(--accent); font-size: 9px; font-weight: 800; letter-spacing: 1.5px; }
+.pageHeading h2 { margin: 0 0 5px; color: var(--primary); font-size: 28px; }
+.pageHeading div > span { color: var(--muted); font-size: 12px; }
+.version { padding: 7px 11px; border-radius: 20px; color: var(--accent); background: #e7f4f1; font-size: 9px; font-weight: 800; }
+.policyPanel { border: 1px solid var(--border); border-radius: 16px; background: #ffffff; box-shadow: var(--shadow); }
+.intro { display: flex; align-items: center; gap: 13px; padding: 22px 24px; border-bottom: 1px solid var(--border); }
+.introIcon { display: grid; width: 39px; height: 39px; flex: 0 0 auto; place-items: center; border-radius: 12px; color: #ffffff; background: var(--accent); font-family: Georgia, serif; font-size: 18px; font-weight: 700; }
+.intro h3 { margin: 0 0 4px; color: var(--primary); font-size: 15px; }
+.intro p { margin: 0; color: var(--muted); font-size: 10px; }
+.accordion { padding: 6px 24px 17px; }
+.policy { border-bottom: 1px solid var(--border); }
+.policy:last-child { border-bottom: 0; }
+.policy > button { display: flex; width: 100%; cursor: pointer; align-items: center; justify-content: space-between; gap: 20px; padding: 19px 2px; border: 0; color: var(--text); background: transparent; text-align: left; }
+.policy h3 { margin: 0 0 4px; color: var(--primary); font-size: 13px; }
+.policy button p { margin: 0; color: var(--muted); font-size: 10px; }
+.policy button > span { display: grid; width: 28px; height: 28px; flex: 0 0 auto; place-items: center; border-radius: 50%; color: var(--accent); background: #e7f4f1; font-size: 18px; font-weight: 500; }
+.open h3 { color: var(--accent); }
+.content { margin: -4px 42px 19px 2px; padding: 14px 16px; border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; background: #f7faf9; }
+.content p { margin: 0; color: #4f5b66; font-size: 11px; line-height: 1.65; }
+.content small { display: block; margin-top: 10px; color: #8a929b; font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+@media (max-width: 560px) { .version { display: none; } .accordion { padding-inline: 17px; } .intro { padding-inline: 18px; } }
