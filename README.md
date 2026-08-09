@@ -10,6 +10,10 @@ A self-contained HR dashboard built with Java and CSS. No framework or external 
 
 Then open <http://localhost:8080>.
 
+## Deploy to Netlify
+
+The included `netlify.toml` publishes the `public` directory automatically. The hosted version uses browser-local demo data, while the Java server provides the API during local use.
+
 ## Features
 
 - Employee directory with live search and department filters

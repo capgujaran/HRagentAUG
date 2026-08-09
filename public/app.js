@@ -1,10 +1,29 @@
-const state = { employees: [], leaves: [] };
+const demoEmployees = [
+  {id:1,name:'Maya Patel',role:'Product Designer',department:'Product',location:'Dubai',initials:'MP',status:'Active'},
+  {id:2,name:'Omar Hassan',role:'Engineering Lead',department:'Engineering',location:'Abu Dhabi',initials:'OH',status:'Active'},
+  {id:3,name:'Sofia Reyes',role:'People Partner',department:'People',location:'Remote',initials:'SR',status:'On leave'},
+  {id:4,name:'Noah Williams',role:'Finance Analyst',department:'Finance',location:'Dubai',initials:'NW',status:'Active'},
+  {id:5,name:'Aisha Rahman',role:'Frontend Engineer',department:'Engineering',location:'Remote',initials:'AR',status:'Active'},
+  {id:6,name:'Liam Chen',role:'Growth Manager',department:'Marketing',location:'Dubai',initials:'LC',status:'Active'}
+];
+const demoLeaves = [
+  {id:1,name:'Sofia Reyes',type:'Annual leave',dates:'12–16 Aug',duration:'5 days',status:'Pending',initials:'SR'},
+  {id:2,name:'Omar Hassan',type:'Personal leave',dates:'19 Aug',duration:'1 day',status:'Pending',initials:'OH'},
+  {id:3,name:'Aisha Rahman',type:'Annual leave',dates:'25–27 Aug',duration:'3 days',status:'Approved',initials:'AR'}
+];
+const state = { employees: [], leaves: [], hostedDemo: false };
 const $ = (selector) => document.querySelector(selector);
 
 async function loadData() {
-  const [employees, leaves] = await Promise.all([fetch('/api/employees').then(r => r.json()), fetch('/api/leaves').then(r => r.json())]);
-  state.employees = employees;
-  state.leaves = leaves;
+  try {
+    const responses = await Promise.all([fetch('/api/employees'), fetch('/api/leaves')]);
+    if (responses.some(response => !response.ok || !response.headers.get('content-type')?.includes('application/json'))) throw new Error('API unavailable');
+    [state.employees, state.leaves] = await Promise.all(responses.map(response => response.json()));
+  } catch {
+    state.hostedDemo = true;
+    state.employees = demoEmployees.map(employee => ({...employee}));
+    state.leaves = demoLeaves.map(leave => ({...leave}));
+  }
   populateDepartments();
   renderEmployees();
   renderLeaves();
@@ -29,9 +48,12 @@ function renderLeaves() {
 }
 
 async function updateLeave(id, status) {
-  const response = await fetch(`/api/leaves/${id}`, { method: 'PATCH', headers: {'Content-Type':'application/json'}, body: JSON.stringify({status}) });
-  if (!response.ok) return toast('Could not update request');
-  const updated = await response.json();
+  let updated = {...state.leaves.find(leave => leave.id === id), status};
+  if (!state.hostedDemo) {
+    const response = await fetch(`/api/leaves/${id}`, { method: 'PATCH', headers: {'Content-Type':'application/json'}, body: JSON.stringify({status}) });
+    if (!response.ok) return toast('Could not update request');
+    updated = await response.json();
+  }
   state.leaves = state.leaves.map(l => l.id === id ? updated : l);
   renderLeaves();
   toast(`Request ${status.toLowerCase()}`);
@@ -51,9 +73,16 @@ modal.addEventListener('click', e => { if (e.target === modal) modal.close(); })
 $('#employeeForm').addEventListener('submit', async e => {
   e.preventDefault();
   const data = Object.fromEntries(new FormData(e.target));
-  const response = await fetch('/api/employees', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
-  if (!response.ok) return toast('Please complete all required fields');
-  state.employees.push(await response.json());
+  let employee;
+  if (state.hostedDemo) {
+    const parts = data.name.trim().split(/\s+/);
+    employee = {...data,id:Math.max(...state.employees.map(item => item.id),0)+1,initials:(parts[0][0]+(parts.at(-1)[0]||'')).toUpperCase(),status:'Active'};
+  } else {
+    const response = await fetch('/api/employees', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
+    if (!response.ok) return toast('Please complete all required fields');
+    employee = await response.json();
+  }
+  state.employees.push(employee);
   e.target.reset(); modal.close(); populateDepartments(); renderEmployees(); toast('Employee added successfully');
 });
 
@@ -65,4 +94,4 @@ document.querySelectorAll('.tasks input').forEach(input => input.addEventListene
 
 function toast(message) { const el = $('#toast'); el.textContent = message; el.classList.add('show'); clearTimeout(window.toastTimer); window.toastTimer = setTimeout(() => el.classList.remove('show'), 2200); }
 function escapeHtml(value) { return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
-loadData().catch(() => toast('Unable to connect to the HR service'));
+loadData();
