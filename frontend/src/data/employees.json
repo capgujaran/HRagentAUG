@@ -1,0 +1,10 @@
+[
+  { "id": 1, "name": "Maya Patel", "role": "Product Designer", "department": "Product", "email": "maya.patel@peoplehub.ae" },
+  { "id": 2, "name": "Omar Hassan", "role": "Engineering Lead", "department": "Engineering", "email": "omar.hassan@peoplehub.ae" },
+  { "id": 3, "name": "Sofia Reyes", "role": "People Partner", "department": "People & Culture", "email": "sofia.reyes@peoplehub.ae" },
+  { "id": 4, "name": "Noah Williams", "role": "Finance Analyst", "department": "Finance", "email": "noah.williams@peoplehub.ae" },
+  { "id": 5, "name": "Aisha Rahman", "role": "Frontend Engineer", "department": "Engineering", "email": "aisha.rahman@peoplehub.ae" },
+  { "id": 6, "name": "Liam Chen", "role": "Growth Manager", "department": "Marketing", "email": "liam.chen@peoplehub.ae" },
+  { "id": 7, "name": "Priya Nair", "role": "Payroll Specialist", "department": "People & Culture", "email": "priya.nair@peoplehub.ae" },
+  { "id": 8, "name": "Daniel Kim", "role": "Account Executive", "department": "Sales", "email": "daniel.kim@peoplehub.ae" }
+]

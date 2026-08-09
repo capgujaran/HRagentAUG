@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "Annual Leave Policy",
+    "summary": "Eligibility, accrual, notice periods, and carry-over rules.",
+    "content": "Full-time employees receive 25 working days of paid annual leave each calendar year. Submit requests through PeopleHub at least 10 working days in advance when possible. Up to five unused days may be carried into the next calendar year with manager approval.",
+    "updated": "July 2026"
+  },
+  {
+    "id": 2,
+    "title": "Remote & Hybrid Work",
+    "summary": "Guidelines for flexible work locations and office attendance.",
+    "content": "Eligible employees may work remotely up to two days per week with manager agreement. Teams set shared collaboration days. Employees must maintain a safe workspace, reliable connectivity, and availability during their agreed working hours.",
+    "updated": "June 2026"
+  },
+  {
+    "id": 3,
+    "title": "Medical Benefits",
+    "summary": "Coverage, dependants, claims, and provider information.",
+    "content": "Medical insurance is provided to eligible employees from their first day of employment. Eligible dependants may be added during onboarding or annual enrollment. Emergency care should follow the insurer's published network and reimbursement process.",
+    "updated": "January 2026"
+  },
+  {
+    "id": 4,
+    "title": "Code of Conduct",
+    "summary": "Expected workplace behavior and reporting channels.",
+    "content": "Everyone is expected to act with integrity, respect colleagues, protect confidential information, and avoid conflicts of interest. Concerns may be raised confidentially with a manager, People & Culture, or the ethics reporting channel without retaliation.",
+    "updated": "April 2026"
+  },
+  {
+    "id": 5,
+    "title": "Learning & Development",
+    "summary": "Professional learning allowance and approval process.",
+    "content": "Employees may request up to AED 2,500 per calendar year for role-relevant courses, certifications, and conferences. Obtain manager approval before purchasing and submit receipts through the expense platform within 30 days.",
+    "updated": "August 2026"
+  }
+]

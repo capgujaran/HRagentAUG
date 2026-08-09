@@ -1,0 +1,30 @@
+.page { display: grid; gap: 22px; }
+.pageHeading { display: flex; align-items: end; justify-content: space-between; }
+.pageHeading p { margin: 0 0 5px; color: var(--accent); font-size: 9px; font-weight: 800; letter-spacing: 1.5px; }
+.pageHeading h2 { margin: 0 0 5px; color: var(--primary); font-size: 28px; }
+.pageHeading div > span { color: var(--muted); font-size: 12px; }
+.pageHeading > strong { color: var(--accent); font-size: 28px; text-align: right; }
+.pageHeading > strong small { display: block; color: var(--muted); font-size: 9px; font-weight: 600; }
+.layout { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .7fr); gap: 18px; align-items: start; }
+.tablePanel, .formPanel { overflow: hidden; border: 1px solid var(--border); border-radius: 16px; background: #ffffff; box-shadow: var(--shadow); }
+.panelHeading { display: flex; align-items: center; justify-content: space-between; padding: 21px 23px 16px; }
+.panelHeading h3 { margin: 0 0 4px; color: var(--primary); font-size: 16px; }
+.panelHeading p { margin: 0; color: var(--muted); font-size: 10px; }
+.panelHeading > span { padding: 5px 9px; border-radius: 20px; color: var(--accent); background: #e7f4f1; font-size: 9px; font-weight: 800; }
+.tableWrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th { padding: 11px 17px; color: #8d95a0; background: #f8fafc; font-size: 8px; font-weight: 800; text-align: left; text-transform: uppercase; letter-spacing: .7px; }
+td { padding: 15px 17px; border-top: 1px solid var(--border); color: #66707b; font-size: 10px; white-space: nowrap; }
+td strong { color: var(--primary); font-size: 11px; }
+.status { display: inline-block; padding: 5px 8px; border-radius: 20px; font-size: 8px; font-weight: 800; }
+.approved { color: #21735f; background: #e4f5f0; }
+.pending { color: #9a671b; background: #fff3db; }
+.declined { color: #b54b42; background: #fde9e7; }
+.formPanel form { display: grid; gap: 14px; padding: 0 23px 23px; }
+.formPanel label { display: grid; gap: 6px; color: var(--primary); font-size: 10px; font-weight: 700; }
+.formPanel input, .formPanel select, .formPanel textarea { width: 100%; border: 1px solid var(--border); border-radius: 9px; padding: 10px 11px; color: var(--text); background: #ffffff; font-size: 11px; resize: vertical; }
+.dateFields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.formPanel button { cursor: pointer; border: 0; border-radius: 10px; padding: 11px 15px; color: #ffffff; background: var(--accent); font-size: 11px; font-weight: 800; }
+.notice { margin: 0 23px 15px; padding: 10px 12px; border-radius: 9px; color: #21735f; background: #e7f4f1; font-size: 10px; }
+@media (max-width: 1050px) { .layout { grid-template-columns: 1fr; } }
+@media (max-width: 540px) { .pageHeading > strong { display: none; } .dateFields { grid-template-columns: 1fr; } }

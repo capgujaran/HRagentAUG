@@ -1,5 +1,12 @@
 [build]
-  publish = "public"
+  command = "npm run build:frontend"
+  publish = "frontend/dist"
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/chat"
+  to = "/.netlify/functions/chat"
+  status = 200
 
 [[redirects]]
   from = "/*"

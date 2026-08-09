@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Annual benefits enrollment opens Monday",
+    "date": "August 10, 2026",
+    "category": "Benefits",
+    "description": "Review your health, dental, and wellness selections before the August 28 deadline."
+  },
+  {
+    "id": 2,
+    "title": "Quarterly town hall",
+    "date": "August 14, 2026",
+    "category": "Company",
+    "description": "Join the leadership team at 3:00 PM GST for business updates and live Q&A."
+  },
+  {
+    "id": 3,
+    "title": "New learning allowance available",
+    "date": "August 18, 2026",
+    "category": "Learning",
+    "description": "Employees can now claim up to AED 2,500 annually for approved professional development."
+  }
+]
