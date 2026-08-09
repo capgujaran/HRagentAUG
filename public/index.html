@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PeopleFlow — HR Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#" aria-label="PeopleFlow home"><span class="brand-mark">P</span><span>PeopleFlow</span></a>
+    <nav>
+      <a class="nav-item active" href="#dashboard"><span>⌂</span> Overview</a>
+      <a class="nav-item" href="#people"><span>♙</span> People</a>
+      <a class="nav-item" href="#leave"><span>◷</span> Time off <b class="nav-badge">2</b></a>
+      <a class="nav-item" href="#onboarding"><span>✓</span> Onboarding</a>
+      <a class="nav-item" href="#reports"><span>▥</span> Reports</a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="help-icon">?</div>
+      <div><strong>Need a hand?</strong><small>Visit help center</small></div>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <button class="menu" aria-label="Open menu">☰</button>
+      <div class="top-actions">
+        <button class="icon-btn" aria-label="Notifications">♢<i></i></button>
+        <div class="profile"><span class="avatar coral">JD</span><span><strong>Jordan Davis</strong><small>HR Manager</small></span><span>⌄</span></div>
+      </div>
+    </header>
+
+    <div class="content" id="dashboard">
+      <section class="welcome">
+        <div><p class="eyebrow">SUNDAY, AUGUST 9</p><h1>Good morning, Jordan <span>👋</span></h1><p>Here’s what’s happening with your team today.</p></div>
+        <button class="primary" id="openModal"><span>＋</span> Add employee</button>
+      </section>
+
+      <section class="metrics" aria-label="HR metrics">
+        <article class="metric"><div class="metric-icon purple">♙</div><div><span>Total employees</span><strong id="employeeCount">48</strong><small class="up">↑ 4 this month</small></div></article>
+        <article class="metric"><div class="metric-icon mint">✓</div><div><span>On leave today</span><strong>3</strong><small>6% of workforce</small></div></article>
+        <article class="metric"><div class="metric-icon yellow">☆</div><div><span>Open positions</span><strong>7</strong><small class="up">↑ 2 new roles</small></div></article>
+        <article class="metric"><div class="metric-icon blue">◴</div><div><span>Avg. attendance</span><strong>96.8%</strong><small class="up">↑ 1.2% vs July</small></div></article>
+      </section>
+
+      <section class="grid-main">
+        <article class="panel activity-panel">
+          <div class="panel-title"><div><h2>Team pulse</h2><p>Weekly attendance overview</p></div><select aria-label="Time period"><option>This week</option><option>Last week</option></select></div>
+          <div class="chart-wrap">
+            <div class="chart-labels"><span>50</span><span>40</span><span>30</span><span>20</span><span>10</span><span>0</span></div>
+            <div class="chart" aria-label="Attendance chart">
+              <div class="grid-lines"></div>
+              <div class="bar-group"><div class="bar" style="--h:84%"><em>42</em></div><span>Mon</span></div>
+              <div class="bar-group"><div class="bar" style="--h:92%"><em>46</em></div><span>Tue</span></div>
+              <div class="bar-group"><div class="bar today" style="--h:88%"><em>44</em></div><span>Wed</span></div>
+              <div class="bar-group"><div class="bar" style="--h:94%"><em>47</em></div><span>Thu</span></div>
+              <div class="bar-group"><div class="bar" style="--h:78%"><em>39</em></div><span>Fri</span></div>
+            </div>
+          </div>
+          <div class="chart-legend"><span><i class="dot purple-dot"></i> Present</span><span><i class="dot pale-dot"></i> Total: 48 employees</span></div>
+        </article>
+
+        <article class="panel leave-panel" id="leave">
+          <div class="panel-title"><div><h2>Time off requests</h2><p>Awaiting your review</p></div><a href="#leave">View all</a></div>
+          <div id="leaveList" class="leave-list"></div>
+        </article>
+      </section>
+
+      <section class="grid-bottom">
+        <article class="panel directory" id="people">
+          <div class="panel-title"><div><h2>Employee directory</h2><p>People across your organization</p></div><div class="directory-actions"><label class="search"><span>⌕</span><input id="searchInput" placeholder="Search people…"></label><select id="departmentFilter"><option value="">All teams</option></select></div></div>
+          <div class="table-wrap"><table><thead><tr><th>Employee</th><th>Department</th><th>Location</th><th>Status</th><th></th></tr></thead><tbody id="employeeRows"></tbody></table></div>
+        </article>
+
+        <article class="panel onboarding" id="onboarding">
+          <div class="panel-title"><div><h2>Onboarding</h2><p>New starter progress</p></div><span class="count">3 active</span></div>
+          <div class="new-hire"><span class="avatar peach">EK</span><div><strong>Emma Khan</strong><small>UX Researcher · Starts Aug 12</small></div></div>
+          <div class="progress-head"><span>Overall progress</span><strong id="progressText">67%</strong></div><div class="progress"><i id="progressBar"></i></div>
+          <div class="tasks">
+            <label><input type="checkbox" checked> <span>Employment documents signed</span></label>
+            <label><input type="checkbox" checked> <span>Equipment prepared</span></label>
+            <label><input type="checkbox"> <span>Team introduction scheduled</span></label>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="employeeModal">
+    <form id="employeeForm">
+      <div class="modal-head"><div><p class="eyebrow">GROW YOUR TEAM</p><h2>Add a new employee</h2></div><button type="button" class="close" id="closeModal">×</button></div>
+      <label>Full name<input name="name" required placeholder="e.g. Sara Ahmed"></label>
+      <div class="form-row"><label>Job title<input name="role" required placeholder="e.g. Product Manager"></label><label>Department<select name="department" required><option>Engineering</option><option>Product</option><option>People</option><option>Finance</option><option>Marketing</option></select></label></div>
+      <label>Location<select name="location"><option>Dubai</option><option>Abu Dhabi</option><option>Remote</option></select></label>
+      <div class="modal-actions"><button type="button" class="secondary" id="cancelModal">Cancel</button><button class="primary" type="submit">Add employee</button></div>
+    </form>
+  </dialog>
+  <div id="toast" role="status"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
